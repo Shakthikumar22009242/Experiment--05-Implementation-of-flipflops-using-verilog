@@ -1,8 +1,8 @@
 # Experiment--05-Implementation-of-flipflops-using-verilog
-### AIM: To implement all the flipflops using verilog and validating their functionality using their functional tables
+## AIM: To implement all the flipflops using verilog and validating their functionality using their functional tables
 ### HARDWARE REQUIRED:  – PC, Cyclone II , USB flasher
 ### SOFTWARE REQUIRED:   Quartus prime
-### THEORY 
+## THEORY 
 SR Flip-Flop
 SR flip-flop operates with only positive clock transitions or negative clock transitions. Whereas, SR latch operates with enable signal. The circuit diagram of SR flip-flop is shown in the following figure.
 
@@ -101,40 +101,107 @@ From the above characteristic table, we can directly write the next state equati
 Q(t+1)=T′Q(t)+TQ(t)′
 ⇒Q(t+1)=T⊕Q(t)
 
-### Procedure
-/* write all the steps invloved */
+## Procedure
+### Step1:
+Open Quartus II and select new project and choose the file location.
+### Step2:
+Declare the module having the file name.
+### Step3:
+Declare the inputs and outputs.
+### Step4:
+Give the codes for respective flipflops and at the end declare the endmodule.
+### Step5:
+Run the program and get the RTL viewer and also timing diagram.
 
-
-
-### PROGRAM 
+## PROGRAM 
 /*
 Program for flipflops  and verify its truth table in quartus using Verilog programming.
-Developed by: 
-RegisterNumber:  
+
+Developed by: Shakthi kumar S
+
+RegisterNumber: 212222110043
+
 */
+### For SR flipflop:
+```c++
+module ex05(S,R,clk,Q,Qb);
+input S,R,clk;
+output reg Q;
+output reg Qb;
+initial Q=0;
+initial Qb=1;
+always @(posedge clk)
+begin
+Q=S|((~R)&Q);
+Qb=R|((~S)&(Qb));
+end
+endmodule
+```
+### For JK flipflop:
+```c++
+module ex05(J,K,clk,Q,Qb);
+input J,K,clk;
+output reg Q;
+output reg Qb;
+initial Q=0;
+initial Qb=1;
+always @(posedge clk)
+begin
+Q=(J&(~Q))|((~K)&Q);
+Qb=((~J)&(Qb))|K&(~Qb);
+end
+endmodule
+```
+### For T flipflop:
+```c++
+module ex05(D,clk,Q,Qb);
+input D,clk;
+output reg Q;
+output reg Qb;
+initial Q=0;
+initial Qb=1;
+always @(posedge clk)
+begin
+Q=D;
+Qb=~D;
+end
+endmodule
+```
+### For D flipflop:
+```c++
+module ex05(T,clk,Q,Qb);
+input T,clk;
+output reg Q;
+output reg Qb;
+initial Q=0;
+initial Qb=1;
+always @(posedge clk)
+begin
+Q=(T&(~Q))|((~T)&Q);
+Qb=((~T)&Qb)|(T&(~Qb));
+end
+endmodule
+```
 
+## RTL LOGIC FOR FLIPFLOPS 
+### SR flip flop:
+![](DE05-1.png)
+### JK flip flop:
+![](DE05-2.png)
+### T flip flop:
+![](DE05-4.png)
+### D flip flop:
+![](DE05-3.png)
 
+## TIMING DIGRAMS FOR FLIP FLOPS 
+### SR flip flop:
+![](DE05-5.png)
+### JK flip flop:
+![](DE05-6.png)
+### T flip flop:
+![](DE05-8.png)
+### D flip flop:
+![](DE05-7.png)
 
-
-
-
-### RTL LOGIC FOR FLIPFLOPS 
-
-
-
-
-
-
-
-
-
-### TIMING DIGRAMS FOR FLIP FLOPS 
-
-
-
-
-
-
-
-
-### RESULTS 
+## RESULT
+Thus, all the flipflops are implemented using verilog and their functionality has been validated using their functional tables.
